@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="groups">
+    <Key>
+      <PropertyRef Name="group_ID" />
+    </Key>
+    <Property Name="group_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tab_students" Relationship="Self.FK_tab_students_groups" FromRole="groups" ToRole="tab_students" />
+  </EntityType>
+  <EntityType Name="tab_order">
+    <Key>
+      <PropertyRef Name="order_ID" />
+    </Key>
+    <Property Name="order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_student_ID" Type="Int32" Nullable="false" />
+    <Property Name="order_ticket_ID" Type="Int32" Nullable="false" />
+    <Property Name="order_count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tab_students" Relationship="Self.FK_tab_order_tab_students" FromRole="tab_order" ToRole="tab_students" />
+    <NavigationProperty Name="tab_tickets" Relationship="Self.FK_tab_order_tab_tickets" FromRole="tab_order" ToRole="tab_tickets" />
+  </EntityType>
+  <EntityType Name="tab_students">
+    <Key>
+      <PropertyRef Name="student_ID" />
+    </Key>
+    <Property Name="student_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_group_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="groups" Relationship="Self.FK_tab_students_groups" FromRole="tab_students" ToRole="groups" />
+    <NavigationProperty Name="tab_order" Relationship="Self.FK_tab_order_tab_students" FromRole="tab_students" ToRole="tab_order" />
+  </EntityType>
+  <EntityType Name="tab_tickets">
+    <Key>
+      <PropertyRef Name="ticket_ID" />
+    </Key>
+    <Property Name="ticket_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ticket_prise" Type="Int32" Nullable="false" />
+    <Property Name="ticket_type_ID" Type="Int32" Nullable="false" />
+    <Property Name="ticket_count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tab_order" Relationship="Self.FK_tab_order_tab_tickets" FromRole="tab_tickets" ToRole="tab_order" />
+    <NavigationProperty Name="tab_tickets1" Relationship="Self.FK_tab_tickets_tab_tickets" FromRole="tab_tickets" ToRole="tab_tickets1" />
+    <NavigationProperty Name="tab_tickets2" Relationship="Self.FK_tab_tickets_tab_tickets" FromRole="tab_tickets1" ToRole="tab_tickets" />
+    <NavigationProperty Name="ticket_type" Relationship="Self.FK_tab_tickets_ticket_type" FromRole="tab_tickets" ToRole="ticket_type" />
+  </EntityType>
+  <EntityType Name="ticket_type">
+    <Key>
+      <PropertyRef Name="ticket_ID" />
+    </Key>
+    <Property Name="ticket_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ticket_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tab_tickets" Relationship="Self.FK_tab_tickets_ticket_type" FromRole="ticket_type" ToRole="tab_tickets" />
+  </EntityType>
+  <Association Name="FK_tab_students_groups">
+    <End Role="groups" Type="Self.groups" Multiplicity="1" />
+    <End Role="tab_students" Type="Self.tab_students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="group_ID" />
+      </Principal>
+      <Dependent Role="tab_students">
+        <PropertyRef Name="student_group_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tab_order_tab_students">
+    <End Role="tab_students" Type="Self.tab_students" Multiplicity="1" />
+    <End Role="tab_order" Type="Self.tab_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tab_students">
+        <PropertyRef Name="student_ID" />
+      </Principal>
+      <Dependent Role="tab_order">
+        <PropertyRef Name="order_student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tab_order_tab_tickets">
+    <End Role="tab_tickets" Type="Self.tab_tickets" Multiplicity="1" />
+    <End Role="tab_order" Type="Self.tab_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tab_tickets">
+        <PropertyRef Name="ticket_ID" />
+      </Principal>
+      <Dependent Role="tab_order">
+        <PropertyRef Name="order_ticket_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tab_tickets_tab_tickets">
+    <End Role="tab_tickets" Type="Self.tab_tickets" Multiplicity="1" />
+    <End Role="tab_tickets1" Type="Self.tab_tickets" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tab_tickets">
+        <PropertyRef Name="ticket_ID" />
+      </Principal>
+      <Dependent Role="tab_tickets1">
+        <PropertyRef Name="ticket_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tab_tickets_ticket_type">
+    <End Role="ticket_type" Type="Self.ticket_type" Multiplicity="1" />
+    <End Role="tab_tickets" Type="Self.tab_tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ticket_type">
+        <PropertyRef Name="ticket_ID" />
+      </Principal>
+      <Dependent Role="tab_tickets">
+        <PropertyRef Name="ticket_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBLibraryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="groups" EntityType="Self.groups" />
+    <EntitySet Name="tab_order" EntityType="Self.tab_order" />
+    <EntitySet Name="tab_students" EntityType="Self.tab_students" />
+    <EntitySet Name="tab_tickets" EntityType="Self.tab_tickets" />
+    <EntitySet Name="ticket_type" EntityType="Self.ticket_type" />
+    <AssociationSet Name="FK_tab_students_groups" Association="Self.FK_tab_students_groups">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="tab_students" EntitySet="tab_students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tab_order_tab_students" Association="Self.FK_tab_order_tab_students">
+      <End Role="tab_students" EntitySet="tab_students" />
+      <End Role="tab_order" EntitySet="tab_order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tab_order_tab_tickets" Association="Self.FK_tab_order_tab_tickets">
+      <End Role="tab_tickets" EntitySet="tab_tickets" />
+      <End Role="tab_order" EntitySet="tab_order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tab_tickets_tab_tickets" Association="Self.FK_tab_tickets_tab_tickets">
+      <End Role="tab_tickets" EntitySet="tab_tickets" />
+      <End Role="tab_tickets1" EntitySet="tab_tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tab_tickets_ticket_type" Association="Self.FK_tab_tickets_ticket_type">
+      <End Role="ticket_type" EntitySet="ticket_type" />
+      <End Role="tab_tickets" EntitySet="tab_tickets" />
+    </AssociationSet>
+    <EntitySet Name="LOGIN" EntityType="DBLibraryModel.LOGIN" />
+  </EntityContainer>
+  <EntityType Name="LOGIN">
+    <Key>
+      <PropertyRef Name="LG_ID" />
+    </Key>
+    <Property Name="LG_ID" Type="Int32" Nullable="false" />
+    <Property Name="LG_PASSWORD" Type="String" Nullable="false" MaxLength="16" FixedLength="true" Unicode="false" />
+    <Property Name="LG_ISADMIN" Type="Boolean" Nullable="false" />
+    <Property Name="LG_LOGIN" Type="String" Nullable="false" MaxLength="16" FixedLength="true" Unicode="false" />
+  </EntityType>
+</Schema>

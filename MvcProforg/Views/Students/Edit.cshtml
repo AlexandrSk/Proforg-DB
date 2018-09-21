@@ -1,0 +1,52 @@
+﻿@model ProforgDataEF.tab_students
+
+@{
+    IEnumerable<ProforgDataEF.tab_students> CmpList = ViewBag.CmpList;
+    ViewBag.Title = "Змінити";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Студенти</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.student_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.student_name,"ПІБ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.student_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.student_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.student_group_ID, "Група", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.student_group_ID, CmpList.Select(z => new SelectListItem()
+           { Text = z.groups.group_name, Value = (z.groups.group_ID).ToString(), Selected = true }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.student_group_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Зберегти" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "StudentsRender")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

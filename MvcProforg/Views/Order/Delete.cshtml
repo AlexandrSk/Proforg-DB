@@ -1,0 +1,47 @@
+﻿@model ProforgDataEF.tab_order
+
+@{
+    ViewBag.Title = "Видалити";
+}
+
+<h2>Видалити</h2>
+
+<h3>Ви точно хочите видалити?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.order_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tab_students.student_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tab_students.student_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tab_tickets.ticket_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tab_tickets.ticket_ID)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "OrderRender")
+        </div>
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProforgDataEF.tab_tickets>
+
+@{
+    ViewBag.Title = "Квитки";
+}
+
+<h2>Квитки</h2>
+
+<p>
+    @Html.ActionLink("Додати квиток", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ticket_prise)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ticket_count)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ticket_type.ticket_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_prise)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_count)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_type.ticket_name)
+        </td>
+        <td>
+            @Html.ActionLink("Змінити", "Edit", new { id=item.ticket_ID }) |
+            @Html.ActionLink("Видалити", "Delete", new { id=item.ticket_ID })
+        </td>
+    </tr>
+}
+
+</table>

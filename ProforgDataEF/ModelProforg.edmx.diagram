@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59413e0426b847a9b3fff435628e56ac" Name="Diagram1">
+        <EntityTypeShape EntityType="DBLibraryModel.groups" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLibraryModel.tab_order" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLibraryModel.tab_students" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLibraryModel.tab_tickets" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLibraryModel.ticket_type" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="DBLibraryModel.FK_tab_students_groups" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLibraryModel.FK_tab_order_tab_students" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLibraryModel.FK_tab_order_tab_tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLibraryModel.FK_tab_tickets_tab_tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLibraryModel.FK_tab_tickets_ticket_type" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBLibraryModel.LOGIN" Width="1.5" PointX="5.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

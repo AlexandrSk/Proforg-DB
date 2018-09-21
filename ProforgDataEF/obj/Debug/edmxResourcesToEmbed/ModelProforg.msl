@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DBLibraryModelContainer" CdmEntityContainer="DBLibraryEntities">
+    <EntitySetMapping Name="groups">
+      <EntityTypeMapping TypeName="DBLibraryModel.groups">
+        <MappingFragment StoreEntitySet="groups">
+          <ScalarProperty Name="group_ID" ColumnName="group_ID" />
+          <ScalarProperty Name="group_name" ColumnName="group_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tab_order">
+      <EntityTypeMapping TypeName="DBLibraryModel.tab_order">
+        <MappingFragment StoreEntitySet="tab_order">
+          <ScalarProperty Name="order_ID" ColumnName="order_ID" />
+          <ScalarProperty Name="order_student_ID" ColumnName="order_student_ID" />
+          <ScalarProperty Name="order_ticket_ID" ColumnName="order_ticket_ID" />
+          <ScalarProperty Name="order_count" ColumnName="order_count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tab_students">
+      <EntityTypeMapping TypeName="DBLibraryModel.tab_students">
+        <MappingFragment StoreEntitySet="tab_students">
+          <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+          <ScalarProperty Name="student_name" ColumnName="student_name" />
+          <ScalarProperty Name="student_group_ID" ColumnName="student_group_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tab_tickets">
+      <EntityTypeMapping TypeName="DBLibraryModel.tab_tickets">
+        <MappingFragment StoreEntitySet="tab_tickets">
+          <ScalarProperty Name="ticket_ID" ColumnName="ticket_ID" />
+          <ScalarProperty Name="ticket_prise" ColumnName="ticket_prise" />
+          <ScalarProperty Name="ticket_type_ID" ColumnName="ticket_type_ID" />
+          <ScalarProperty Name="ticket_count" ColumnName="ticket_count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ticket_type">
+      <EntityTypeMapping TypeName="DBLibraryModel.ticket_type">
+        <MappingFragment StoreEntitySet="ticket_type">
+          <ScalarProperty Name="ticket_ID" ColumnName="ticket_ID" />
+          <ScalarProperty Name="ticket_name" ColumnName="ticket_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOGIN">
+      <EntityTypeMapping TypeName="DBLibraryModel.LOGIN">
+        <MappingFragment StoreEntitySet="LOGIN">
+          <ScalarProperty Name="LG_LOGIN" ColumnName="LG_LOGIN" />
+          <ScalarProperty Name="LG_ISADMIN" ColumnName="LG_ISADMIN" />
+          <ScalarProperty Name="LG_PASSWORD" ColumnName="LG_PASSWORD" />
+          <ScalarProperty Name="LG_ID" ColumnName="LG_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

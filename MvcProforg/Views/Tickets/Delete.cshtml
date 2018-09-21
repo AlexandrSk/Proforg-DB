@@ -1,0 +1,50 @@
+﻿@model ProforgDataEF.tab_tickets
+
+@{
+    ViewBag.Title = "Видалити";
+}
+
+<h2>Видалити</h2>
+
+<h3>Ви точно хочете видалити квиток?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_prise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_prise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_count)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_type.ticket_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_type.ticket_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "TicketsRender")
+        </div>
+    }
+</div>
